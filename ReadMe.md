@@ -101,8 +101,20 @@ print("Hello, World")
 ***
 ___
 
-* 링크 : 링크를 추가하면 문서에서 다른 웹페이지로 연결이 가능해짐E45: 'readonly' option is set (add ! to override)
-E45: 'readonly' option is set (add ! to override)
+* 링크 : 링크를 추가하면 문서에서 다른 웹페이지로 연결이 가능해짐
+- 인라인 링크[Google](https://www.google.com)
+- 참조 링크 [Google][google-link][google-link]: https://www.google.com
+- 자동 링크 https://www.google.com
 
-[Google](https://www.google.com)
+* 이미지 
+-인라인 이미지 ![예시](./IMG/t.png)
+-참조 이미지 ![예시][예시..] [예시..]: ./IMG/t.png
+
+* 강조 
+-굵게 표시: 굵게 표시하려는 텍스트를 두 개의 별표('**'), 언더스코어('__')사이에 넣습니다
+**굵은 텍스트**, __굵은 텍스트__
+-기울임꼴로 표시 : 표시하려는 텍스트를 하나의 별표('*'), 언더스코어 ('_')사이에 넣습니다.
+*기울임꼴 텍스트*, _기울임꼴 텍스트_
+-굵게 및 기욺임꼴을 동시 :  표시하려는 텍스트를 세개의 별표('***'), 언더스코어 ('___')사이에 넣습니다.
+***굵은 텍스트***, ___굵은 텍스트___
 
