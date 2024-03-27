@@ -24,25 +24,16 @@ void CursorPosition(GLFWwindow* window, double xpos, double ypos)
     cursorMoved = (xpos != x) || (ypos != y);
     x = xpos;
     y = ypos;
-    if (!cursorMoved) {
-        if (L == GLFW_PRESS)
-        {
-            glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
-        }
-        else if (R == GLFW_PRESS)
-        {
-            glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-        }
-    }
+   
     if(cursorMoved)
     {
         if (L == GLFW_PRESS)
         {
-            glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
+            glClearColor(1.0f, 0.0f, 1.0f, 1.0f);//자홍색
         }
         else if (R == GLFW_PRESS)
         {
-            glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
+            glClearColor(0.0f, 0.0f, 1.0f, 1.0f);//파란색
         }
     }
 }
@@ -100,15 +91,15 @@ int main(void)
         {
             if (a) 
             {
-                glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
+                glClearColor(0.0f, 1.0f, 0.0f, 1.0f);//녹색
             }
             else if(b)
             {
-                glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
+                glClearColor(1.0f, 0.0f, 0.0f, 0.0f);//빨강
             }
             else 
             {
-                glClearColor(0.f, 0.f, 0.f, 1.f);
+                glClearColor(0.f, 0.f, 0.f, 1.f);//검정
             }
         }
     }
