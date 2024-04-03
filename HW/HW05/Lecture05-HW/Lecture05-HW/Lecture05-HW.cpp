@@ -1,4 +1,4 @@
-#pragma comment(lib, "Opengl32.lib")
+ï»¿#pragma comment(lib, "Opengl32.lib")
 #include <GLFW/glfw3.h>
 #include <iostream>
 
@@ -7,8 +7,9 @@ float moveFactorY = 0.0f;
 float scaleFactor = 1.0f;
 double x = 0.0;
 double y = 0.0;
-double x2= 0.0;
+double x2 = 0.0;
 double y2 = 0.0;
+
 void errorCallback(int error, const char* description)
 {
     std::cerr << "GLFW Error: " << description << std::endl;
@@ -18,15 +19,15 @@ void CursorPosition(GLFWwindow* window, double xpos, double ypos)
 {
     int L = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT);
     int R = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT);
-    if (L== GLFW_PRESS)//ÀÌµ¿
+    if (L == GLFW_PRESS)//ì´ë™
     {
         double t = xpos - x;
-        double t2 = y-ypos;
+        double t2 = y - ypos;
         if (t > 0) //x
         {
             moveFactorX += t * 0.001;
         }
-        else if (t < 0) 
+        else if (t < 0)
         {
             moveFactorX += t * 0.001;
         }
@@ -35,19 +36,20 @@ void CursorPosition(GLFWwindow* window, double xpos, double ypos)
         {
             moveFactorY += t2 * 0.001;
         }
-        else if (t2 < 0) 
+        else if (t2 < 0)
         {
             moveFactorY += t2 * 0.001;
         }
     }
-    if (R == GLFW_PRESS)//È®´ë,Ãà¼Ò
+
+    if (R == GLFW_PRESS) // í™•ëŒ€,ì¶•ì†Œ
     {
         double t = xpos - x;
-        if (t > 0) //È®´ë
+        if (t > 0) //í™•ëŒ€
         {
             scaleFactor += t * 0.00001;
         }
-        else if (t < 0) // Ãà¼Ò
+        else if (t < 0) // ì¶•ì†Œ
         {
             scaleFactor += t * 0.00001;
         }
@@ -62,49 +64,42 @@ int render()
 {
     glBegin(GL_TRIANGLES);
     glColor3f(1.0f, 1.0f, 1.0f);
-    glVertex2f((0.8f + moveFactorX)* scaleFactor, (0.3f + moveFactorY) * scaleFactor);
+    glVertex2f((0.8f + moveFactorX) * scaleFactor, (0.3f + moveFactorY) * scaleFactor);
 
     glColor3f(1.0f, 1.0f, 1.0f);
-    glVertex2f(( - 0.8f + moveFactorX)* scaleFactor, (0.3f + moveFactorY)* scaleFactor);
+    glVertex2f((-0.8f + moveFactorX) * scaleFactor, (0.3f + moveFactorY) * scaleFactor);
 
     glColor3f(1.0f, 1.0f, 1.0f);
-    glVertex2f((0.0f + moveFactorX)* scaleFactor, (-0.4f + moveFactorY) * scaleFactor);
-
+    glVertex2f((0.0f + moveFactorX) * scaleFactor, (-0.4f + moveFactorY) * scaleFactor);
     glEnd();
 
     glBegin(GL_TRIANGLES);
     glColor3f(1.0f, 1.0f, 1.0f);
-    glVertex2f((0.0f + moveFactorX)* scaleFactor, (1.0f + moveFactorY) * scaleFactor);
+    glVertex2f((0.0f + moveFactorX) * scaleFactor, (1.0f + moveFactorY) * scaleFactor);
 
     glColor3f(1.0f, 1.0f, 1.0f);
-    glVertex2f(( - 0.5f + moveFactorX)* scaleFactor, (-0.8f + moveFactorY)* scaleFactor);
+    glVertex2f((-0.5f + moveFactorX) * scaleFactor, (-0.8f + moveFactorY) * scaleFactor);
 
     glColor3f(1.0f, 1.0f, 1.0f);
-    glVertex2f((0.3f + moveFactorX)* scaleFactor, (-0.3f + moveFactorY) * scaleFactor);
-
+    glVertex2f((0.3f + moveFactorX) * scaleFactor, (-0.3f + moveFactorY) * scaleFactor);
     glEnd();
 
     glBegin(GL_TRIANGLES);
     glColor3f(1.0f, 1.0f, 1.0f);
-    glVertex2f((0.0f + moveFactorX)* scaleFactor, (1.0f + moveFactorY) * scaleFactor);
+    glVertex2f((0.0f + moveFactorX) * scaleFactor, (1.0f + moveFactorY) * scaleFactor);
 
     glColor3f(1.0f, 1.0f, 1.0f);
-    glVertex2f(( - 0.3f + moveFactorX)* scaleFactor, (-0.3f + moveFactorY)* scaleFactor);
+    glVertex2f((-0.3f + moveFactorX) * scaleFactor, (-0.3f + moveFactorY) * scaleFactor);
 
     glColor3f(1.0f, 1.0f, 1.0f);
-    glVertex2f((0.5f + moveFactorX)* scaleFactor, (-0.8f + moveFactorY) * scaleFactor);
-
+    glVertex2f((0.5f + moveFactorX) * scaleFactor, (-0.8f + moveFactorY) * scaleFactor);
     glEnd();
-
     return 0;
 }
 int main(void)
 {
-
     if (!glfwInit())
         return -1;
-
-
     GLFWwindow* window;
     window = glfwCreateWindow(1280, 768, "MuSoeunEngine", NULL, NULL);
     if (!window)
@@ -115,7 +110,6 @@ int main(void)
     glfwMakeContextCurrent(window);
     glfwSetErrorCallback(errorCallback);
     glfwSetCursorPosCallback(window, CursorPosition);
-
 
     while (!glfwWindowShouldClose(window))
     {
