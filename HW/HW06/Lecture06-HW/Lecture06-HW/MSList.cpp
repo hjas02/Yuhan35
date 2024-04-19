@@ -13,15 +13,7 @@ template <typename T>
 MSList<T>::MSList() : _head(nullptr), _size(0) {}
 
 template <typename T>
-MSList<T>::~MSList() {
-    MSNode<T>* current = _head;
-    while (current != nullptr) {
-        MSNode<T>* next = current->next_node;
-        delete current;
-        current = next;
-    }
-}
-
+MSList<T>::~MSList() {}
 
 template <typename T>
 int MSList<T>::get_size() {
