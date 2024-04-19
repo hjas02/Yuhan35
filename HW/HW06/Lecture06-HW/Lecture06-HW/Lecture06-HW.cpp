@@ -25,7 +25,6 @@ int initialize()
 		float g = dist(rng);
 		float b = dist(rng);
 		float x = distX(rng);
-		// Y 좌표를 무작위로 생성
 		float y = distY(rng);
 		star* newStar = new star(r, g, b, x, y);
 		starList.add(newStar);
@@ -34,6 +33,9 @@ int initialize()
 }
 int release()
 {
+	for (int i = 0; i < starList.get_size(); ++i) {
+		delete starList[i]; 
+	}
 	return 0;
 }
 

@@ -3,11 +3,11 @@
 
 // 생성자 구현
 template <typename T>
-MSNode<T>::MSNode(T data) : data(data), next_node(nullptr) {}
+MSNode<T>::MSNode(T data) : data(data), next_node(nullptr) { std::cout << "별이 추가되었습니다" << std::endl; }
 
 // 소멸자 구현
 template <typename T>
-MSNode<T>::~MSNode() {}
+MSNode<T>::~MSNode() { std::cout << "별이 소멸되었습니다" << std::endl; }
 
 template <typename T>
 MSList<T>::MSList() : _head(nullptr), _size(0) {}
