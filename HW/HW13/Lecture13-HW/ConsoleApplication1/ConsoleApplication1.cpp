@@ -2,11 +2,21 @@
 
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include <chrono>
+#include <thread>
+/*
+  화면 800x800(-1.0f ~ 1.0f)
+  1M : 1.0f =  400px / 0.1f = 40px 
+  0.0025f = 1px
+   
+   중력가속도 = 9.8 
+   60fps = 9.8 / 60  (0.1633)
 
+*/
 class Rectangle {
 public:
     float x, y, width, height;
-    float r, g, b; 
+    float r, g, b;
     float r2, g2, b2;
 
     Rectangle(float x, float y, float width, float height, float r, float g, float b, float r2, float g2, float b2)
@@ -62,11 +72,10 @@ private:
 
 public:
     Game()
-        : window(nullptr), 
-        //x y w h r g b r g b 
-        player(0.0, 0.0, 0.25, 0.25, 1, 0, 0, 0, 1, 0), 
-        land(0.0, -0.5, 3.0, 0.25, 0, 0, 1, 0, 1, 0), 
-        speed(0), gravity(-0.00001) {}
+        : window(nullptr),
+        player(0.0, 0.0, 0.1, 0.1, 1, 0, 0, 0, 1, 0), //플레이어 1M 정사각형
+        land(0.0, -0.8, 2.0, 0.1, 0, 0, 1, 0, 1, 0),
+        speed(0), gravity(9.8 / 60) {}
 
     void init() {
         if (!glfwInit()) {
@@ -76,7 +85,7 @@ public:
 
         glfwSetErrorCallback(errorCallback);
 
-        window = glfwCreateWindow(800, 800, "MuSoeunEngine", NULL, NULL);
+        window = glfwCreateWindow(800, 800, "MuSoeunEngine", NULL, NULL);  
         if (!window) {
             glfwTerminate();
             exit(EXIT_FAILURE);
@@ -88,13 +97,26 @@ public:
     }
 
     void run() {
+        const int fps = 60;
+        const std::chrono::milliseconds frame_duration(1000 / fps);
+
         while (!glfwWindowShouldClose(window)) {
+            auto start_time = std::chrono::steady_clock::now();
+
             glClear(GL_COLOR_BUFFER_BIT);
 
             render();
 
             glfwSwapBuffers(window);
             glfwPollEvents();
+
+            auto end_time = std::chrono::steady_clock::now();
+            auto elapsed = end_time - start_time;
+            auto sleep_duration = frame_duration - elapsed;
+
+            if (sleep_duration > std::chrono::milliseconds::zero()) {
+                std::this_thread::sleep_for(sleep_duration);
+            }
         }
 
         glfwDestroyWindow(window);
@@ -112,7 +134,7 @@ public:
             glfwSetWindowShouldClose(window, GLFW_TRUE);
         }
         if (key == GLFW_KEY_SPACE && action == GLFW_PRESS) {
-            game->player.y += 0.5f;
+            game->player.y += 0.5f ;
         }
         if (key == GLFW_KEY_RIGHT && (action == GLFW_PRESS || action == GLFW_REPEAT)) {
             game->player.x += 0.1f;
@@ -123,15 +145,14 @@ public:
     }
 
     void render() {
-        std::cout << speed << std::endl;
-
         player.draw();
         land.draw();
-
+        std::cout << speed << std::endl;
         if (!player.checkCollision(land)) {
-            speed += gravity; 
+            speed -= gravity;
             player.y += speed;
-        } else {
+        }
+        else {
             speed = 0;
         }
     }
